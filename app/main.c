@@ -1,11 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "template_demo/library.h"
 
-/**
- * The main entry point to the application.
- *
- * @return  0 on success, otherwise an error code.
- */
-int main(void) {
-    hello();
-    return 0;
+int main(int argc, char *argv[]) {
+    printf("Hello, example!\n");
+    struct bowling *game = bowling_init();
+    bowling_free(game);
+    return EXIT_SUCCESS;
 }

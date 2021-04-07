@@ -10,7 +10,7 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 enable_testing()
 
-if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+if (${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME})
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
     include(CTest)
     find_package(Doxygen)
@@ -20,21 +20,12 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
         message(STATUS "Doxygen not found, not building docs")
     endif ()
 
-    else()
+else ()
     message(STATUS "Didn't equal project names")
 endif ()
 
 add_subdirectory(src)
-
 add_subdirectory(app)
-
-if ((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING) AND BUILD_TESTING)
-    add_subdirectory(tests)
-endif ()
-#
-#add_library(template_demo_lib src/library.c include/template_demo/library.h)
-#target_include_directories(template_demo_lib PUBLIC include)
-#target_compile_features(template_demo_lib PUBLIC c_std_11)
-#
-#add_executable(template-demo app/main.c)
-#target_link_libraries(template-demo PUBLIC template_demo_lib)
+#if ((${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME} OR template_demo_BUILD_TESTING) AND BUILD_TESTING)
+add_subdirectory(tests)
+#endif ()
